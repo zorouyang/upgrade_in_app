@@ -1,0 +1,14 @@
+{
+  "statusCode": 0,
+  "message": "",
+  "upgradeInfo": {
+    "versionCode": 31,
+    "versionName": "3.2.2",
+    "downloadUrl": "http://dl.mango.cc/test/android/SUNMobile_v3.2.1_30_b254_20190531_P.apk",
+    "title": "有新版本",
+    "changelog": "新版本v3.2.2\n更多內容\n更穩定\n建議立即更新",
+    "forceUpgrade": false,
+    "updateButton": "立即更新",
+    "continueButton": "暫不更新"
+  }
+}

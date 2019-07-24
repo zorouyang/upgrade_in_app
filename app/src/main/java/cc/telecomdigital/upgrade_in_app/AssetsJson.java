@@ -11,10 +11,10 @@ import cc.telecomdigital.upgrade_in_app.checkversion.bean.UpdateBean;
 
 public class AssetsJson {
 
-    public static UpdateBean parseAsset(Context context) {
+    public static UpdateBean parseAsset(Context context, String assetJson) {
         UpdateBean bean = null;
         try {
-            InputStream inputStream = context.getAssets().open("check_version.json");
+            InputStream inputStream = context.getAssets().open(assetJson);
             int size = inputStream.available();
             byte[] buffer = new byte[size];
             inputStream.read(buffer);

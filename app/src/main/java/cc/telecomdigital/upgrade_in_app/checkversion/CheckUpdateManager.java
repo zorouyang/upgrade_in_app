@@ -135,7 +135,10 @@ public class CheckUpdateManager {
     }
 
     public static void testCheck(Context context) {
-        UpdateBean bean = AssetsJson.parseAsset(context);
+        testCheck(context, true);
+    }
+    public static void testCheck(Context context, boolean force) {
+        UpdateBean bean = AssetsJson.parseAsset(context, force ? "check_version.json" : "check_flexible_version.json");
         LogUtil.d("Sample: " + bean);
 
         if (bean == null || bean.getStatusCode() != 0)
