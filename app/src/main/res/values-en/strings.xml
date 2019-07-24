@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">upgrade-in-app</string>
+
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
+    <string name="pause">Pause</string>
+
+    <string name="upgrade">Upgrade</string>
+    <string name="downloading">Downloading, Please wait...</string>
+
+    <string name="download_file_error">Download error with file</string>
+    <string name="download_failure">Download failure</string>
+
+    <string name="download">Download </string>
+    <string name="download_complete_action">Install upgrade after download completed.</string>
+</resources>

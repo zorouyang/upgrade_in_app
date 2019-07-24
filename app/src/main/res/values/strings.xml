@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">upgrade-in-app</string>
+
+    <string name="update">更新</string>
+    <string name="cancel">取消</string>
+    <string name="pause">暫停</string>
+
+    <string name="upgrade">升級</string>
+    <string name="downloading">安裝包下載中, 請稍後...</string>
+
+    <string name="download_file_error">文件下載錯誤</string>
+    <string name="download_failure">下载失败</string>
+
+    <string name="download">下載</string>
+    <string name="download_complete_action">下載完成後安裝APK</string>
+</resources>
