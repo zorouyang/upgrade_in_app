@@ -1,7 +1,7 @@
 # upgrade_in_app
 upgrade in app demo
 
-# gradle using jitpak
+# Gradle with jitpack
 
 [![](https://jitpack.io/v/zorouyang/upgrade_in_app.svg)](https://jitpack.io/#zorouyang/upgrade_in_app)
 
