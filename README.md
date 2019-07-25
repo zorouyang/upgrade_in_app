@@ -1,6 +1,7 @@
 # Gradle with jitpack [![](https://jitpack.io/v/zorouyang/upgrade_in_app.svg)](https://jitpack.io/#zorouyang/upgrade_in_app)
 
 # Features
+- Check versoin with url response
 - Force upgrade in app
 - Flexible upgrade with DownloadManager API
 - Force and flexible upgrade with Play core API for Android 5.0 or later
@@ -49,6 +50,25 @@ Step 2. Add the dependency
 	}
 
 # Code
+Check versoin with url response
+
+	CheckUpdateManager.checkUpdate(context, url)
+	Response: 
+	{
+	  "statusCode": 0,
+	  "message": "",
+	  "upgradeInfo": {
+	    "versionCode": 31,
+	    "versionName": "3.2.2",
+	    "downloadUrl": "https://domain/url/",
+	    "title": "有新版本",
+	    "changelog": "新版本v3.2.2\n更多內容\n更穩定\n建議立即更新",
+	    "forceUpgrade": true,//true/false
+	    "updateButton": "立即更新",
+	    "continueButton": "暫不更新"
+	  }
+	}
+
 Force upgrade
 
 	UpgradeManager.getInstance().upgrade(context, downloadUrl)
