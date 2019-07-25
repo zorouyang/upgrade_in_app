@@ -8,24 +8,32 @@
 
 # Screenshot
 <table>
-  <tr>
+   <tr>
     <td width="30%">
       <h3>Force upgrade</h3>
-      (Upgrade in app)<br/>
+      (Upgrade in app)
+    </td>
+    <td width="30%">
+      <h3>Flexible/background upgrade</h3>
+      (DownloadManager API)
+    </td>
+    <td width="30%">
+      <h3>Force and flexible upgrade with play store</h3>
+      (Play core API) Android 5.0 above
+    </td>
+  </tr>
+  <tr>
+    <td width="30%">
       <img src="Screenshot/check.png" width="100%" /><br/>
       <img src="Screenshot/download.png" width="100%" /><br/>
     </td>
     <td width="30%">
-      <h3>Flexible/background upgrade</h3>
-      (DownloadManager API)<br/>
       <img src="Screenshot/check_d.png" width="100%" /><br/>
       <img src="Screenshot/download_d.png" width="100%" /><br/>
     </td>
     <td width="30%">
-      <h3>Force and flexible upgrade with play store</h3>
-      (Play core API) Android 5.0 above<br/>
-      <img src="Screenshot/check_p.png" width="100%" /><br/>
-      <img src="Screenshot/download_p.png" width="100%" /><br/>
+      please see:<br/>
+	https://developer.android.google.cn/guide/app-bundle/in-app-updates
     </td>
   </tr>
 </table>
@@ -77,7 +85,7 @@ Background upgrade with DownloadManager API
 
 	DownloadBackgroundManager.download(context, downloadUrl)
 	
-Play store with Play core API on android 5.0 above
+Play store with Play core API on android 5.0 above https://developer.android.com/guide/app-bundle/in-app-updates
 
 	new InAppUpgradeManager(activity).forceUpgrade()
 	new InAppUpgradeManager(activity).flexibleUpdate()
