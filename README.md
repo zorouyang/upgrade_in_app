@@ -1,8 +1,7 @@
-# upgrade_in_app
-# Gradle with jitpack [![](https://jitpack.io/v/zorouyang/upgrade_in_app.svg)](https://jitpack.io/#zorouyang/upgrade_in_app)
+# upgrade_in_app Gradle with jitpack [![](https://jitpack.io/v/zorouyang/upgrade_in_app.svg)](https://jitpack.io/#zorouyang/upgrade_in_app)
 ==================================================
 
-# upgrade_in_app
+# Features
 - Force upgrade in app
 - Flexible upgrade with DownloadManager API
 - Force and flexible upgrade with Play core API for Android 5.0 or later
@@ -13,19 +12,19 @@
   <tr>
     <td width="30%">
       <h3>Force upgrade</h3>
-      (Upgrade in app)
+      (Upgrade in app)<br/>
       <img src="Screenshot/check.png" width="30%" />
       <img src="Screenshot/download.png" width="30%" />
     </td>
     <td width="30%">
       <h3>Flexible/background upgrade</h3>
-      (DownloadManager API)
+      (DownloadManager API)<br/>
       <img src="Screenshot/check_d.png" width="30%" />
       <img src="Screenshot/download_d.png" width="30%" />
     </td>
     <td width="30%">
       <h3>Force and flexible upgrade with play store</h3>
-      (Play core API) Android 5.0 above
+      (Play core API) Android 5.0 above<br/>
       <img src="Screenshot/check_d.png" width="30%" />
       <img src="Screenshot/download_d.png" width="30%" />
     </td>
