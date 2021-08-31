@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
@@ -20,12 +20,15 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.google.android.play:core:1.5.0'//5.0 or later
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.play:core:1.10.0'//5.0 or later
 
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    /*OkHttp [starting from 3.13] works on Android 5.0+ (API level 21+) and on Java 8+.
+    https://medium.com/square-corner-blog/okhttp-3-13-requires-android-5-818bb78d07ce
+    The only way is use OkHttp 3.12.x if your minSDK lower 21. */
+    implementation 'com.squareup.okhttp3:okhttp:3.12.12'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     /*To get versionName from Play store*/
     //implementation 'org.jsoup:jsoup:1.10.2'
