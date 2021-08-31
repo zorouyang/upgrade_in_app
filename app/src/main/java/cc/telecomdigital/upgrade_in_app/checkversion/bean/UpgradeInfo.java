@@ -11,13 +11,14 @@ public class UpgradeInfo {
     private String downloadUrl;
 
     private boolean forceUpgrade;
+    private boolean allowBackgroundDownload;
 
     private String updateButton;
     private String continueButton;
 
     @Override
     public String toString() {
-        return "UpgradeInfo{" + "versionCode=" + versionCode + ", versionName='" + versionName + '\'' + ", title='" + title + '\'' + ", changelog='" + changelog + '\'' + ", downloadUrl='" + downloadUrl + '\'' + ", forceUpgrade=" + forceUpgrade + ", updateButton='" + updateButton + '\'' + ", continueButton='" + continueButton + '\'' + '}';
+        return "UpgradeInfo{" + "versionCode=" + versionCode + ", versionName='" + versionName + '\'' + ", title='" + title + '\'' + ", changelog='" + changelog + '\'' + ", downloadUrl='" + downloadUrl + '\'' + ", forceUpgrade=" + forceUpgrade + ", allowBackgroundDownload=" + allowBackgroundDownload + ", updateButton='" + updateButton + '\'' + ", continueButton='" + continueButton + '\'' + '}';
     }
 
     public int getVersionCode() {
@@ -66,6 +67,14 @@ public class UpgradeInfo {
 
     public void setForceUpgrade(boolean forceUpgrade) {
         this.forceUpgrade = forceUpgrade;
+    }
+
+    public boolean isAllowBackgroundDownload() {
+        return allowBackgroundDownload;
+    }
+
+    public void setAllowBackgroundDownload(boolean allowBackgroundDownload) {
+        this.allowBackgroundDownload = allowBackgroundDownload;
     }
 
     public String getUpdateButton() {

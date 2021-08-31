@@ -1,7 +1,9 @@
 package cc.telecomdigital.upgrade_in_app.downloadinapp;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -51,6 +53,7 @@ public class UpgradeManager {
         return manager;
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -88,7 +91,7 @@ public class UpgradeManager {
     };
 
     private ProgressDialog mProgressDialog;
-    private void createDialog(final Context context, @DrawableRes int ic_launcher) {
+    private void createDialog(final Context context, boolean isForce, @DrawableRes int ic_launcher) {
         if (mProgressDialog == null && context != null) {
             mProgressDialog = new ProgressDialog(context);
             mProgressDialog.setTitle(context.getString(R.string.upgrade));
@@ -99,28 +102,31 @@ public class UpgradeManager {
             mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             mProgressDialog.setCancelable(false);
             mProgressDialog.setCanceledOnTouchOutside(false);
-            /*mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    cancelUpgrade();
-                }
-            });
-            mProgressDialog.setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.pause), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    pauseUpgrade();
-                }
-            });*/
+
+            if (!isForce) {
+                mProgressDialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        cancelUpgrade();
+                    }
+                });
+                mProgressDialog.setButton(DialogInterface.BUTTON_POSITIVE, context.getString(R.string.pause), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        pauseUpgrade();
+                    }
+                });
+            }
         }
     }
 
     private WeakReference<Context> ctxWeakRef;
-    public void upgrade(final Context context, @NonNull final String apkUrl) {
-        upgrade(context, apkUrl, null, 0);
+    public void upgrade(final Context context, @NonNull final String apkUrl, boolean isForce) {
+        upgrade(context, apkUrl, null, 0, isForce);
     }
-    public void upgrade(final Context context, @NonNull final String apkUrl, String versionName, int versionCode) {
+    public void upgrade(final Context context, @NonNull final String apkUrl, String versionName, int versionCode, boolean isForce) {
 
-        createDialog(context, R.mipmap.ic_launcher);
+        createDialog(context, isForce, R.mipmap.ic_launcher);
         ctxWeakRef = new WeakReference<>(context);
 
         startUpgrade(apkUrl, context.getString(R.string.app_name), versionName, versionCode, new OnUpgradeListener() {

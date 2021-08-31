@@ -7,7 +7,8 @@
     "downloadUrl": "http://dl.mango.cc/mmm/",
     "title": "有新版本",
     "changelog": "新版本v3.2.2\n更多內容\n更穩定\n建議立即更新",
-    "forceUpgrade": true,
+    "forceUpgrade": false,
+    "allowBackgroundDownload": false,
     "updateButton": "立即更新",
     "continueButton": "暫不更新"
   }

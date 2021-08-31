@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
 
@@ -113,17 +115,7 @@ public class CheckUpdateManager {
                 .setCancelable(false)
                 .setTitle(upgradeInfo.getTitle())
                 .setMessage(upgradeInfo.getChangelog())
-                .setPositiveButton(positive, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-
-                        if (upgradeInfo.isForceUpgrade())
-                            UpgradeManager.getInstance().upgrade(context, upgradeInfo.getDownloadUrl(), upgradeInfo.getVersionName(), upgradeInfo.getVersionCode());
-                        else
-                            DownloadBackgroundManager.download(context, upgradeInfo.getDownloadUrl());
-                    }
-                });
+                .setPositiveButton(positive, null);
         if (!upgradeInfo.isForceUpgrade()) {
             String negative = context.getString(R.string.cancel);
             if (!TextUtils.isEmpty(upgradeInfo.getContinueButton())) {
@@ -131,7 +123,23 @@ public class CheckUpdateManager {
             }
             builder.setNegativeButton(negative, null);
         }
-        builder.show();
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        //防止自动关闭
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                if (upgradeInfo.isAllowBackgroundDownload() && !upgradeInfo.isForceUpgrade()) {
+                    DownloadBackgroundManager.download(context, upgradeInfo.getDownloadUrl());
+                    Toast.makeText(context, "Download in background...", Toast.LENGTH_SHORT).show();
+                } else {
+                    UpgradeManager.getInstance().upgrade(context, upgradeInfo.getDownloadUrl(), upgradeInfo.isForceUpgrade());
+                }
+            }
+        });
     }
 
     public static void testCheck(Context context) {
