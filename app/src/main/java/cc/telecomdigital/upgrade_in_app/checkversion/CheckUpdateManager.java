@@ -3,6 +3,7 @@ package cc.telecomdigital.upgrade_in_app.checkversion;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
@@ -13,7 +14,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import cc.telecomdigital.upgrade_in_app.AssetsJson;
-import cc.telecomdigital.upgrade_in_app.BuildConfig;
 import cc.telecomdigital.upgrade_in_app.R;
 import cc.telecomdigital.upgrade_in_app.checkversion.bean.UpdateBean;
 import cc.telecomdigital.upgrade_in_app.checkversion.bean.UpgradeInfo;
@@ -30,7 +30,7 @@ public class CheckUpdateManager {
 
     private static OnCheckUpdateListener mOnCheckUpdateListener;
 
-    public static void checkUpdate(String url, final OnCheckUpdateListener onCheckUpdateListener) {
+    public static void checkUpdate(final Context context, String url, final OnCheckUpdateListener onCheckUpdateListener) {
         mOnCheckUpdateListener = onCheckUpdateListener;
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -59,7 +59,7 @@ public class CheckUpdateManager {
                     return;
 
                 UpgradeInfo info = bean.getUpgradeInfo();
-                if (info.getVersionCode() > BuildConfig.VERSION_CODE) {
+                if (info.getVersionCode() > getVersionCode(context)) {
                     if (mOnCheckUpdateListener != null)
                         mOnCheckUpdateListener.onFindNewVersion(info);
                 } else {
@@ -71,6 +71,7 @@ public class CheckUpdateManager {
     }
 
     public static void checkUpdate(final Context context, final String url) {
+        final Handler handler = new Handler();
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(30, TimeUnit.SECONDS);
@@ -98,14 +99,19 @@ public class CheckUpdateManager {
                     return;
 
                 UpgradeInfo info = bean.getUpgradeInfo();
-                if (info.getVersionCode() > BuildConfig.VERSION_CODE) {
-                    buildNewVersionDialog(context, info);
+                if (info.getVersionCode() > getVersionCode(context)) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            buildNewVersionDialog(context, info);
+                        }
+                    });
                 }
             }
         });
     }
 
-    private static void buildNewVersionDialog(final Context context, final UpgradeInfo upgradeInfo) {
+    public static void buildNewVersionDialog(final Context context, final UpgradeInfo upgradeInfo) {
         String positive = context.getString(R.string.update);
         if (!TextUtils.isEmpty(upgradeInfo.getUpdateButton())) {
             positive = upgradeInfo.getUpdateButton();
@@ -153,9 +159,16 @@ public class CheckUpdateManager {
             return;
 
         UpgradeInfo info = bean.getUpgradeInfo();
-
-        if (info.getVersionCode() > BuildConfig.VERSION_CODE) {
+        if (info.getVersionCode() > getVersionCode(context)) {
             buildNewVersionDialog(context, info);
+        }
+    }
+
+    public static int getVersionCode(Context context) {
+        try {
+            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+        } catch (Exception e) {
+            return 0;
         }
     }
 }
